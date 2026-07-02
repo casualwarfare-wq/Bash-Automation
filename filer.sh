@@ -1,11 +1,12 @@
 #!/bin/bash
 if (($# >= 2))
-then
-    PATH=$1
-    NAMES=(-a $2)
+then    
+    DIR=$1
+    shift
+    NAMES=($@)
 elif (($# == 1))
 then
-    PATH=$1
+    DIR=$1
     echo "Enter an array of names separated by spaces:"
     read -a NAMES
     echo "${NAMES[@]}"
@@ -14,12 +15,19 @@ else
     exit 1
 fi
 count=0
-for file in $PATH; do
+for file in "$DIR"/*; do
     if [ -f "$file" ]; then
-        mv "$file" "${NAMES[$count]}"
-        echo "Renamed $file to ${NAMES[$count]}"
+        filename=$(basename "$file")
+        extension="${filename##*.}"
+        new_name="${NAMES[$count]}.$extension"
+        mv "$DIR/$filename" "$DIR/$new_name"
+        echo "Renamed $file to $new_name"
         ((count++))
     fi
 done
+
+
+
+
 
 
