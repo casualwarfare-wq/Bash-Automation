@@ -3,7 +3,7 @@ if (($# >= 2))
 then    
     DIR=$1
     shift
-    NAMES=($@)
+    NAMES=("$@")
 elif (($# == 1))
 then
     DIR=$1

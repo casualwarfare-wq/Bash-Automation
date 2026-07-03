@@ -9,6 +9,3 @@ for ((i=1; i<=LOOPS; i++)); do
     echo "$i"
     python "$SCRIPT"
 done
-
-
-
